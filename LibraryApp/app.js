@@ -4,6 +4,9 @@ var app = express(); //create a instance of express
 
 var port = 5000;
 
+//setup middleware to access the files from public directory
+app.use(express.static('public'));
+
 app.get('/', function(req, res){
 	console.log(req.url);
 	res.send("Helloworld");

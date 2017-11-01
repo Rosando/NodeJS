@@ -7,6 +7,8 @@ var port = 5000;
 //setup middleware to access the files from public directory
 app.use(express.static('public'));
 
+app.use(express.static('src/views'));
+
 app.get('/', function(req, res){
 	console.log(req.url);
 	res.send("Helloworld");

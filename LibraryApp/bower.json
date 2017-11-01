@@ -1,0 +1,21 @@
+{
+  "name": "libraryapp",
+  "description": "simple library application",
+  "main": "app.js",
+  "authors": [
+    "Rosando Desouza"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}

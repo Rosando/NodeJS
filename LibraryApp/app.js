@@ -18,66 +18,13 @@ app.set('views', './src/views');
 //using ejs templating engine
 app.set('view engine', 'ejs');
 
-//using router to build route
-var bookRouter = express.Router();
-
-var bookCollection = [
-	{
-		id: 1
-		title: 'Life On The Mississippi',
-		genre: 'History',
-		author: 'Mark Twain',
-		read: false
-	},
-	{
-		id: 2
-		title: 'Childhood',
-		genre: 'Biography',
-		author: 'Lev Nikolayevich Tolstoy',
-		read: false
-	},
-	{
-		id: 3
-		title: 'War and Peace',
-		genre: 'Historical Fiction',
-		author: 'Lev Nikolayevich Tolstoy',
-		read: false
-	}
-];
-
-bookRouter.route('/')
-		.get(function(req, res){
-			console.log(bookCollection);
-			res.render('./books', {
-				pageTitle: 'Books',
-				nav: [
-					{
-						link: '/Books',
-						text: 'Books'
-					},
-					{
-						link: '/Authors',
-						text: 'Authors'
-					}
-				],
-				books: bookCollection
-			});
-		});
-			
-bookRouter.route('/Single')
-		.get(function(req, res){
-			res.send('Hello Single Book');
-		});
-			
+//using router to build route for books - moving book routing logic to bookRoutes.js
+//only leave middlewar configuration by using modules
+var bookRouter = require('./src/routes/bookRoutes');		
 app.use('/Books', bookRouter);
 
-var authorRouter = express.Router();
-
-authorRouter.route('/')
-		.get(function(req, res){
-			res.send('Hello Authors');
-		});
-		
+//using router to build route for author - moving author routing logic to authorRoutes.js	
+var authorRouter = require('./src/routes/authorRoutes');
 app.use('/Authors', authorRouter);
 
 app.get('/', function(req, res){

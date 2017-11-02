@@ -18,6 +18,30 @@ app.set('views', './src/views');
 //using ejs templating engine
 app.set('view engine', 'ejs');
 
+//using router to build route
+var bookRouter = express.Router();
+
+bookRouter.route('/')
+		.get(function(req, res){
+			res.send('Hello Books');
+		});
+			
+bookRouter.route('/Single')
+		.get(function(req, res){
+			res.send('Hello Single Book');
+		});
+			
+app.use('/Books', bookRouter);
+
+var authorRouter = express.Router();
+
+authorRouter.route('/')
+		.get(function(req, res){
+			res.send('Hello Authors');
+		});
+		
+app.use('/Authors', authorRouter);
+
 app.get('/', function(req, res){
 	//console.log(req.url);
 	//res.send('Helloworld');

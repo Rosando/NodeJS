@@ -21,9 +21,47 @@ app.set('view engine', 'ejs');
 //using router to build route
 var bookRouter = express.Router();
 
+var bookCollection = [
+	{
+		id: 1
+		title: 'Life On The Mississippi',
+		genre: 'History',
+		author: 'Mark Twain',
+		read: false
+	},
+	{
+		id: 2
+		title: 'Childhood',
+		genre: 'Biography',
+		author: 'Lev Nikolayevich Tolstoy',
+		read: false
+	},
+	{
+		id: 3
+		title: 'War and Peace',
+		genre: 'Historical Fiction',
+		author: 'Lev Nikolayevich Tolstoy',
+		read: false
+	}
+];
+
 bookRouter.route('/')
 		.get(function(req, res){
-			res.send('Hello Books');
+			console.log(bookCollection);
+			res.render('./books', {
+				pageTitle: 'Books',
+				nav: [
+					{
+						link: '/Books',
+						text: 'Books'
+					},
+					{
+						link: '/Authors',
+						text: 'Authors'
+					}
+				],
+				books: bookCollection
+			});
 		});
 			
 bookRouter.route('/Single')

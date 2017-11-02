@@ -13,12 +13,27 @@ app.use(express.static('public'));
 app.set('views', './src/views');
 
 //using jade templating engine
-app.set('view engine', 'jade');
+//app.set('view engine', 'jade');
+
+//using ejs templating engine
+app.set('view engine', 'ejs');
 
 app.get('/', function(req, res){
 	//console.log(req.url);
 	//res.send('Helloworld');
-	res.render('./jade/index', {list:['1','2','3','4','5']});
+	res.render('./index', {
+		pageTitle: 'Library App',
+		nav: [
+			{
+				link: '/Books',
+				text: 'Books'
+			},
+			{
+				link: '/Authors',
+				text: 'Authors'
+			}
+		]
+	});
 });
 
 app.get('/books', function(req, res){

@@ -1,0 +1,14 @@
+html
+	head
+		link(rel='stylesheet' href='lib/font-awesome/css/font-awesome.css')
+		link(rel='stylesheet' href='lib/bootstrap/dist/css/bootstrap.css')
+		title Library App
+	body(class=['container fluid-container'])
+		h1(id=['some-id']) Library App
+		
+		ul
+			each val in list
+				li=val
+				
+		script(src='lib/jquery/dist/jquery.js')
+		script(src='lib/bootstrap/dist/js/bootstrap.js')

@@ -1,4 +1,16 @@
 var express = require('express');
+var sql = require('mssql');
+
+var config = {
+	user: 'admin',
+	password: 'password',
+	server: 'Rosando-PC',
+	database: 'LibraryApp'
+};
+
+sql.connect(config, function(error
+	console.log(error);
+});
 
 var app = express(); //create a instance of express
 

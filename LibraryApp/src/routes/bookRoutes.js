@@ -1,4 +1,5 @@
 var express = require('express');
+var sql = require('mssql');
 
 var bookCollection = [
 	{
@@ -29,10 +30,14 @@ var route = function(navItems){
 
 	bookRouter.route('/')
 			.get(function(req, res){
-				res.render('./bookListView', {
-					pageTitle: 'Books',
-					nav: navItems,
-					books: bookCollection
+				var request = new sql.Request();
+				
+				request.request('select * from books', function(error, recordSet){
+					res.render('./bookListView', {
+						pageTitle: 'Books',
+						nav: navItems,
+						books: bookCollection
+					});
 				});
 			});
 			

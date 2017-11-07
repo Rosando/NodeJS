@@ -38,6 +38,10 @@ app.use('/Books', bookRouter);
 var authorRouter = require('./src/routes/authorRoutes')(navItems);
 app.use('/Authors', authorRouter);
 
+//using router to build route for admin
+var adminRouter = require('./src/routes/adminRoutes')(navItems);
+app.use('/Admin', adminRouter);
+
 app.get('/', function(req, res){
 	//console.log(req.url);
 	//res.send('Helloworld');

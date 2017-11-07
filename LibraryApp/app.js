@@ -4,11 +4,11 @@ var sql = require('mssql');
 var config = {
 	user: 'admin',
 	password: 'password',
-	server: 'Rosando-PC',
+	server: 'ROSANDO-PC',
 	database: 'LibraryApp'
 };
 
-sql.connect(config, function(error
+sql.connect(config, function(error){
 	console.log(error);
 });
 

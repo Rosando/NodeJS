@@ -32,25 +32,42 @@ var route = function(navItems){
 			.get(function(req, res){
 				var request = new sql.Request();
 				
-				request.request('select * from books', function(error, recordSet){
+				request.query('select * from books', function(error, recordSet){
 					res.render('./bookListView', {
 						pageTitle: 'Books',
 						nav: navItems,
-						books: bookCollection
+						books: recordSet
 					});
 				});
 			});
 			
 	bookRouter.route('/:id')
-			.get(function(req, res){
-				var id = req.params.id;
+			.all(function(req, res, next){
+				var perparedStatement = new sql.PreparedStatement();
 				
-				var item = bookCollection[id];
+				perparedStatement.input('id', sql.Int);
+				
+				perparedStatement.prepare('select * from books where id = @id', function(error){
+					
+					perparedStatement.execute({id: req.params.id}, function(error, recordSet){
+						if(recordSet === 0){
+							res.status(404).send('Not Found');
+						}
+						else {
+							req.book = recordSet[0];
+							next();
+						}
+					});
+				});
+			})
+			.get(function(req, res){
+				//var id = req.params.id;
+				//var item = bookCollection[id];
 				
 				res.render('./bookView', {
-					pageTitle: item.title,
+					pageTitle: req.book.title,
 					nav: navItems,
-					book: item
+					book = req.book
 				});
 			});
 			

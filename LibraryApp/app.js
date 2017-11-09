@@ -1,5 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
+var expressSession = require('express-session');
 
 var app = express(); //create a instance of express
 
@@ -11,6 +14,11 @@ app.use(express.static('public'));
 //add middlware for body parser
 app.use(bodyParser.json()); //create req.body object
 app.use(bodyParser.urlencoded());
+
+//configure passpost middleware
+//app.use(passport.Initialize());
+//app.use(passport.session());
+require('./src/config/passport')(app);
 
 //app.use(express.static('src/views'));
 

@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 
 var app = express(); //create a instance of express
 
@@ -6,6 +7,10 @@ var port = process.env.PORT || 5000;
 
 //setup middleware to access the files from public directory
 app.use(express.static('public'));
+
+//add middlware for body parser
+app.use(bodyParser.json()); //create req.body object
+app.use(bodyParser.urlencoded());
 
 //app.use(express.static('src/views'));
 
@@ -41,6 +46,10 @@ app.use('/Authors', authorRouter);
 //using router to build route for admin
 var adminRouter = require('./src/routes/adminRoutes')(navItems);
 app.use('/Admin', adminRouter);
+
+//using router to build route for auth
+var authRouter = require('./src/routes/authRoutes')();
+app.use('/Auth', authRouter);
 
 app.get('/', function(req, res){
 	//console.log(req.url);

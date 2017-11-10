@@ -1,9 +1,9 @@
 var express = require('express');
-var mongodb = require('mongodb').MongoClient;
-var ObjectId = require('mongodb').ObjectID;
+
 
 var route = function(navItems){
-	var bookController = require('../controllers/bookController.js')(null, navItems);
+	var bookService = require('../services/goodreadservice')();
+	var bookController = require('../controllers/bookController')(bookService, navItems);
 	
 	var bookRouter = express.Router();
 

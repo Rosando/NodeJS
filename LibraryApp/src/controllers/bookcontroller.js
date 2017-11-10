@@ -25,13 +25,19 @@ var bookController = function(bookService, navItems){
 			var collection = db.collection('books');
 			
 			collection.findOne({_id: id}, function(error, result){
-				response.render('./bookView', {
-					pageTitle: result.title,
-					nav: navItems,
-					book: result
+				
+				bookService.getBookById(result.bookId, function(error, book){
+					result.book = book;
+					
+					response.render('./bookView', {
+						pageTitle: result.title,
+						nav: navItems,
+						book: result
+					});
+					
+					db.close();
 				});
 				
-				db.close();
 			});
 		});
 	};
